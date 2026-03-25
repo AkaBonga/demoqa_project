@@ -25,6 +25,11 @@ class BasePage(ABC):
     def wait_presents_of_element_located(self, locator):
         return WebDriverWait(self.driver, 10).until(presence_of_element_located(locator))
     
+    @allure.step("Ожидание кликабельности элемента")
     def wait_until_button_clickable(self, locator):
         return WebDriverWait(self.driver, 10).until(element_to_be_clickable(locator))
     
+    @allure.step("Клик по заданному элементу")
+    def click(self, locator):
+        self.wait_until_button_clickable(locator)
+        self.driver.find_element(*locator).click()
