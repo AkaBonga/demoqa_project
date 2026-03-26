@@ -1,4 +1,5 @@
 import allure
+import pytest
 
 import data
 from pages.main_pages import MainPage
@@ -9,7 +10,7 @@ class TestMainPage:
 
     @allure.title("Проверка доступности главной страницы")
     @allure.description("Проверка осуществляется соответствию названию загаловка заданным значением")
-    def test_main_page_is_aveleble(self,driver):
+    def test_main_page_is_aveleble(self, driver):
         main_page = MainPage(driver)
         main_page.open(data.BASE_URL)
         
@@ -43,33 +44,17 @@ class TestMainPage:
         with allure.step("title соответвует ожиданию"):
             assert main_page.get_title() == 'demosite'
 
-    @allure.title("Проверка название 1-ой карточки")
-    @allure.description("Название 1-ой карточки соответвует названию на сайте")
-    def test_name_first_card_is_element(self, driver):
-        """
-        1.открыть страницу заданным url,
-        2.подождали пока загрузится,
-        3.находим первую карточку,
-        4.проверить, что название карточки соответвует ожиданию.
-        """
+    @allure.title("Проверка правильности названия карточки с именем {name_card}")
+    @allure.description("Название карточек с именем {name_card}")
+    @pytest.mark.parametrize("name_card", ['Elements',
+                                           'Forms', 
+                                           'Alerts, Frame & Windows', 
+                                           'Widgets',
+                                           'Interactions', 
+                                           'Book Store Application'])
+    def test_name_first_card_is_element(self, driver, name_card):
         main_page = MainPage(driver)
         main_page.open(data.BASE_URL)
 
-        with allure.step("Название первой карточки соответствует ожиданию"):
-            assert main_page.is_card_with_name_elements()
-
-    @allure.title("Проверка название 2-ой карточки")
-    @allure.description("Название 2-ой карточки соответвует названию на сайте") 
-    def test_name_second_card_is_forms(self, driver):
-        """
-        1.открыть страницу заданным url,
-        2.подождали пока загрузится,
-        3.находим вторую карточку,
-        4.проверить, что название карточки соответвует ожиданию.
-        """
-
-        main_page = MainPage(driver)
-        main_page.open(data.BASE_URL)
-
-        with allure.step("Название второй карточки соответствует ожиданию"):
-            assert main_page.is_card_with_name_forms()
+        with allure.step("Название карточек соответствует ожиданию"):
+            assert main_page.is_card_with_name_elements(name_card)

@@ -7,8 +7,7 @@ from pages.base_pages import BasePage
 class MainPage(BasePage):
     CARD_LINK = (By.XPATH, "//div[@class='category-cards']/a")
     LOGO_LINK = (By.XPATH, ".//header/a")
-    FIRST_CARD_NAME = (By.XPATH, ".//h5[text()='Elements']")
-    SECOND_CARD_NAME = (By.XPATH, ".//h5[text()='Forms']")
+    CARD_NAME = lambda name: (By.XPATH, f".//h5[text()='{name}']")
 
     def get_number_cards(self):
         self.wait_presents_of_element_located(MainPage.CARD_LINK)
@@ -19,12 +18,7 @@ class MainPage(BasePage):
     def click_on_logo(self):
         self.click(MainPage.LOGO_LINK)
 
-    @allure.step("Название 1 карточки соответвует ожиданию")
-    def is_card_with_name_elements(self):
-        self.wait_until_button_clickable(MainPage.FIRST_CARD_NAME)
-        return self.driver.find_element(*MainPage.FIRST_CARD_NAME).is_displayed()
-    
-    @allure.step("Название 2 карточки соответвует ожиданию")
-    def is_card_with_name_forms(self):
-        self.wait_until_button_clickable(MainPage.SECOND_CARD_NAME)
-        return self.driver.find_element(*MainPage.SECOND_CARD_NAME).is_displayed()
+    @allure.step("Название карточек соответсовует ожиданию")
+    def is_card_with_name_elements(self, name):
+        self.wait_until_button_clickable(MainPage.CARD_NAME(name))
+        return self.driver.find_element(*MainPage.CARD_NAME(name)).is_displayed()
