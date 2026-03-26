@@ -56,4 +56,20 @@ class TestMainPage:
         main_page.open(data.BASE_URL)
 
         with allure.step("Название первой карточки соответствует ожиданию"):
-            assert main_page.is_card_with_name()
+            assert main_page.is_card_with_name_elements()
+
+    @allure.title("Проверка название 2-ой карточки")
+    @allure.description("Название 2-ой карточки соответвует названию на сайте") 
+    def test_name_second_card_is_forms(self, driver):
+        """
+        1.открыть страницу заданным url,
+        2.подождали пока загрузится,
+        3.находим вторую карточку,
+        4.проверить, что название карточки соответвует ожиданию.
+        """
+
+        main_page = MainPage(driver)
+        main_page.open(data.BASE_URL)
+
+        with allure.step("Название второй карточки соответствует ожиданию"):
+            assert main_page.is_card_with_name_forms()

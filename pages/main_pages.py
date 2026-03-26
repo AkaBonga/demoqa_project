@@ -8,6 +8,7 @@ class MainPage(BasePage):
     CARD_LINK = (By.XPATH, "//div[@class='category-cards']/a")
     LOGO_LINK = (By.XPATH, ".//header/a")
     FIRST_CARD_NAME = (By.XPATH, ".//h5[text()='Elements']")
+    SECOND_CARD_NAME = (By.XPATH, ".//h5[text()='Forms']")
 
     def get_number_cards(self):
         self.wait_presents_of_element_located(MainPage.CARD_LINK)
@@ -19,6 +20,11 @@ class MainPage(BasePage):
         self.click(MainPage.LOGO_LINK)
 
     @allure.step("Название 1 карточки соответвует ожиданию")
-    def is_card_with_name(self):
+    def is_card_with_name_elements(self):
         self.wait_until_button_clickable(MainPage.FIRST_CARD_NAME)
         return self.driver.find_element(*MainPage.FIRST_CARD_NAME).is_displayed()
+    
+    @allure.step("Название 2 карточки соответвует ожиданию")
+    def is_card_with_name_forms(self):
+        self.wait_until_button_clickable(MainPage.SECOND_CARD_NAME)
+        return self.driver.find_element(*MainPage.SECOND_CARD_NAME).is_displayed()
