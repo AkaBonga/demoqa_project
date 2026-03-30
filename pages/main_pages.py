@@ -19,6 +19,6 @@ class MainPage(BasePage):
         self.click(MainPage.LOGO_LINK)
 
     @allure.step("Название карточек соответсовует ожиданию")
-    def is_card_with_name_elements(self, name):
+    def is_card_with_name_cards(self, name):
         self.wait_until_button_clickable(MainPage.CARD_NAME(name))
         return self.driver.find_element(*MainPage.CARD_NAME(name)).is_displayed()

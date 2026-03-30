@@ -10,14 +10,14 @@ class TestMainPage:
 
     @allure.title("Проверка доступности главной страницы")
     @allure.description("Проверка осуществляется соответствию названию загаловка заданным значением")
-    def test_main_page_is_aveleble(self, driver):
+    def test_main_page_is_available(self, driver):
         main_page = MainPage(driver)
         main_page.open(data.BASE_URL)
         
         with allure.step("Проверка названия сайта"):
             assert main_page.get_title() == 'demosite'
 
-    @allure.title("Проверка каточек на странице равно 6")
+    @allure.title("Проверка карточек на странице равно 6")
     @allure.description("На странице должно быть 6 карточек")
     def test_number_of_cards_is_six(self, driver):
         main_page = MainPage(driver)
@@ -41,7 +41,7 @@ class TestMainPage:
         main_page.open(data.BASE_URL)
         main_page.click_on_logo()
         
-        with allure.step("title соответвует ожиданию"):
+        with allure.step("title соответствует ожиданию"):
             assert main_page.get_title() == 'demosite'
 
     @allure.title("Проверка правильности названия карточки с именем {name_card}")
