@@ -57,4 +57,4 @@ class TestMainPage:
         main_page.open(data.BASE_URL)
 
         with allure.step("Название карточек соответствует ожиданию"):
-            assert main_page.is_card_with_name_elements(name_card)
+            assert main_page.is_card_with_name_cards(name_card)

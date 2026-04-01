@@ -1,7 +1,7 @@
 import allure
 import data
 
-from elements_pages import ElementPage
+from pages.elements_pages import ElementPage
 
 
 class TestElements:
